@@ -1,20 +1,24 @@
 class RelationshipsController < ApplicationController
-  def followings
-    user = User.find(params[:id])
-  end
-
-  def followers
-    user = User.find(params[:id])
-  end
-
-  def creatte
-    current_user.follow(params[:id])
-    redirect_to request.referer
+  before_action :authenticate_user!
+  def create
+    user = User.find(params[:user_id])
+    current_user.follow(user)
+		redirect_to request.referer
   end
 
   def destroy
-    current_user.unfollow(params[:id])
-    redirect_to request.referer
+    user = User.find(params[:user_id])
+    current_user.unfollow(user)
+		redirect_to request.referer
   end
 
+  def followings
+    user = User.find(params[:user_id])
+		@users = user.followings
+  end
+
+  def followers
+    user = User.find(params[:user_id])
+		@users = user.followers
+  end
 end
