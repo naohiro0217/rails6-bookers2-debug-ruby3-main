@@ -11,6 +11,7 @@
       <%= render 'books/form', book: @book, user: @user %>
     </div>
     <div class='col-md-8 offset-md-1'>
+      <%= render 'users/search' %>
       <h2>Books</h2>
       <%= render 'books/index',books: @books, user: @user %>
     </div>
